@@ -69,7 +69,7 @@ header.top{
 .top-nav a:hover{color:var(--ink); border-bottom-color:var(--ink);}
 
 /* ---------- обложка ---------- */
-.cover img{width:100%; height:auto; display:block;}
+.cover img, .cover video{width:100%; height:auto; display:block; background:none;}
 .cover-plate{max-width:1000px; margin:-90px auto 0; position:relative; z-index:2; padding:0 30px;}
 .cover-card{background:var(--paper-2); border:1px solid var(--rule); padding:42px 44px 34px;}
 .cover-card h1{font-size:clamp(36px,5.6vw,60px); line-height:1.08; letter-spacing:-.01em;}
@@ -254,7 +254,7 @@ video{width:100%; background:#000;}
   .top-nav{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);
     mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);}
   section{padding:52px 0;}
-  .cover img{aspect-ratio:16/9; height:auto; object-fit:cover; object-position:26% center;}
+  .cover img, .cover video{aspect-ratio:16/9; height:auto; object-fit:cover; object-position:26% center;}
   .cover-plate{margin-top:-44px; padding:0 20px;}
   .cover-card{padding:28px 22px 24px;}
   .toc ol{columns:1;}
@@ -293,6 +293,9 @@ video{width:100%; background:#000;}
 
 @media print{
   header.top, .presets, .toc{display:none;}
+  .cover video{display:none;}
+  .cover::before{content:""; display:block; width:100%; aspect-ratio:1648/544;
+    background:url(assets/hero.jpg) center/cover no-repeat;}
   body{background:#fff; font-size:11.5pt;}
   section{padding:20pt 0;}
   .block,.fig,.panel,.tbl-wrap,figure,.step,.res{break-inside:avoid;}
@@ -324,8 +327,30 @@ video{width:100%; background:#000;}
 </header>
 
 <div class="cover">
-  <img src="assets/hero.jpg" alt="Панно с урасой, заснеженной тундрой и оленями — мотив интерьера павильона">
+  <video id="hero" autoplay muted loop playsinline preload="auto" poster="assets/hero.jpg"
+         aria-label="Панно с урасой, заснеженной тундрой и оленями — мотив интерьера павильона">
+    <source src="assets/hero-loop.mp4" type="video/mp4">
+    <img src="assets/hero.jpg" alt="Панно с урасой, заснеженной тундрой и оленями">
+  </video>
 </div>
+<script>
+(function(){
+  var v = document.getElementById('hero');
+  if (!v) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    v.removeAttribute('autoplay'); v.pause(); v.currentTime = 0; return;
+  }
+  var start = function(){
+    if (!v.paused || document.visibilityState !== 'visible') return;
+    var pr = v.play();
+    if (pr && pr.catch) pr.catch(function(){});
+  };
+  document.addEventListener('visibilitychange', start);
+  v.addEventListener('canplay', start);
+  window.addEventListener('pageshow', start);
+  start();
+})();
+</script>
 <div class="cover-plate">
   <div class="cover-card">
     <h1>Павильон <em>«Маленькая Якутия»</em></h1>
