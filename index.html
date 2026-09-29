@@ -70,7 +70,7 @@ header.top{
 
 /* ---------- обложка ---------- */
 .cover img, .cover video{width:100%; height:auto; display:block; background:none;}
-.cover-plate{max-width:1000px; margin:-90px auto 0; position:relative; z-index:2; padding:0 30px;}
+.cover-plate{max-width:1000px; margin:-32px auto 0; position:relative; z-index:2; padding:0 30px;}
 .cover-card{background:var(--paper-2); border:1px solid var(--rule); padding:42px 44px 34px;}
 .cover-card h1{font-size:clamp(36px,5.6vw,60px); line-height:1.08; letter-spacing:-.01em;}
 .cover-card h1 em{font-style:italic; font-weight:400;}
@@ -90,10 +90,14 @@ header.top{
 .toc h2{font-size:15px; font-family:"IBM Plex Sans",Arial,sans-serif; font-weight:500;
   letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint);
   padding-bottom:10px; border-bottom:1px solid var(--rule); margin-bottom:6px;}
-.toc ol{list-style:none; margin:0; padding:0; columns:2; column-gap:44px;}
-.toc li{break-inside:avoid;}
-.toc a{display:flex; gap:14px; align-items:baseline; text-decoration:none;
-  padding:9px 0; border-bottom:1px solid var(--rule-soft);}
+.toc ol{list-style:none; margin:14px 0 0; padding:0 0 0 26px; border-left:1px solid var(--rule);}
+.toc li{position:relative;}
+.toc li::before{content:""; position:absolute; left:-26px; top:50%; width:16px;
+  height:1px; background:var(--rule);}
+.toc li:hover::before{background:var(--ink); width:22px;}
+.toc a{display:flex; gap:16px; align-items:baseline; text-decoration:none;
+  padding:11px 0; border-bottom:1px solid var(--rule-soft);}
+.toc li:last-child a{border-bottom:none;}
 .toc a:hover{color:var(--accent);}
 .toc .n{font-family:"IBM Plex Sans",Arial,sans-serif; font-size:14px; color:var(--ink-faint);
   font-feature-settings:"tnum" 1; flex:0 0 auto; width:22px;}
@@ -217,13 +221,10 @@ video{width:100%; background:#000;}
   .wrap{padding:0 20px;}
   .top-in{padding:0 20px; gap:14px;}
   .top-mark span{display:none;}
-  .top-nav{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);
-    mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);}
   section{padding:52px 0;}
   .cover img, .cover video{aspect-ratio:16/9; height:auto; object-fit:cover; object-position:26% center;}
-  .cover-plate{margin-top:-44px; padding:0 20px;}
+  .cover-plate{margin-top:18px; padding:0 20px;}
   .cover-card{padding:28px 22px 24px;}
-  .toc ol{columns:1;}
   .calc{grid-template-columns:minmax(0,1fr); gap:38px;}
   .g2,.g3{grid-template-columns:minmax(0,1fr);}
   .figs, .figs-3{grid-template-columns:repeat(2,minmax(0,1fr));}
@@ -277,16 +278,10 @@ video{width:100%; background:#000;}
       <span>Маленькая Якутия</span>
     </div>
     <nav class="top-nav">
-      <a href="#resume">Резюме</a>
-      <a href="#concept">Концепция</a>
-      <a href="#location">Помещение</a>
-      <a href="#design">Дизайн</a>
-      <a href="#residents">Резиденты</a>
-      <a href="#partners">Партнёры</a>
-      <a href="#capex">Вложения</a>
-      <a href="#model">Модель</a>
+      <a href="#concept">Идея</a>
+      <a href="#capex">Деньги</a>
       <a href="#risks">Риски</a>
-      <a href="#road">Этапы</a>
+      <a href="#model">Модель</a>
     </nav>
   </div>
 </header>
